@@ -1,0 +1,15 @@
+﻿  main.cpp
+  KNN.cpp
+  PCA.cpp
+D:\程序\C++\Random Forest\Random Forest\src\PCA.cpp(7,19): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\程序\C++\Random Forest\Random Forest\src\PCA.cpp(8,20): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\程序\C++\Random Forest\Random Forest\src\PCA.cpp(26,19): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\程序\C++\Random Forest\Random Forest\src\PCA.cpp(27,20): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+  RandomForest.cpp
+D:\程序\C++\Random Forest\Random Forest\src\RandomForest.cpp(69,22): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\程序\C++\Random Forest\Random Forest\src\RandomForest.cpp(147,25): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+D:\程序\C++\Random Forest\Random Forest\src\RandomForest.cpp(230,19): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\程序\C++\Random Forest\Random Forest\src\RandomForest.cpp(280,35): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+  Stacking.cpp
+  正在生成代码...
+  Random Forest.vcxproj -> D:\程序\C++\Random Forest\x64\Debug\Random Forest.exe
