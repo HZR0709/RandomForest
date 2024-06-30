@@ -5,6 +5,8 @@
 #include <numeric>
 #include <unordered_map>
 #include <random>
+#include <fstream>
+#include <string>
 
 DecisionTree::DecisionTree(int max_depth, int min_samples_split, int min_samples_leaf)
     : max_depth(max_depth), min_samples_split(min_samples_split), min_samples_leaf(min_samples_leaf), root(nullptr) {}
@@ -142,6 +144,39 @@ int DecisionTree::predict_sample(TreeNode* node, const std::vector<double>& samp
     }
 }
 
+void DecisionTree::save(std::ofstream& ofs) const {
+    save_node(root, ofs);
+}
+
+void DecisionTree::save_node(TreeNode* node, std::ofstream& ofs) const {
+    if (!node) {
+        ofs << "null\n";
+        return;
+    }
+    ofs << node->feature_index << " " << node->threshold << " " << node->prediction << "\n";
+    save_node(node->left, ofs);
+    save_node(node->right, ofs);
+}
+
+void DecisionTree::load(std::ifstream& ifs) {
+    root = load_node(ifs);
+}
+
+TreeNode* DecisionTree::load_node(std::ifstream& ifs) {
+    std::string token;
+    ifs >> token;
+    if (token == "null") {
+        return nullptr;
+    }
+    TreeNode* node = new TreeNode();
+    node->feature_index = std::stoi(token);
+    ifs >> node->threshold >> node->prediction;
+    node->left = load_node(ifs);
+    node->right = load_node(ifs);
+    return node;
+}
+
+// RandomFores
 RandomForest::RandomForest(int num_trees, int max_depth, int min_samples_split, int min_samples_leaf)
     : num_trees(num_trees), max_depth(max_depth), min_samples_split(min_samples_split), min_samples_leaf(min_samples_leaf) {
     std::srand(std::time(nullptr)); // 初始化随机种子
@@ -343,4 +378,28 @@ int RandomForest::majority_vote(const std::vector<int>& labels) const {
         [](const std::pair<int, int>& a, const std::pair<int, int>& b) {
             return a.second < b.second;
         })->first;
+}
+
+// 保存和加载模型的实现
+void RandomForest::save_model(const std::string& filename) const {
+    std::ofstream ofs(filename);
+    if (!ofs.is_open()) {
+        throw std::runtime_error("Could not open file to save model");
+    }
+    ofs << num_trees << " " << max_depth << " " << min_samples_split << " " << min_samples_leaf << "\n";
+    for (const auto& tree : trees) {
+        tree.save(ofs);
+    }
+}
+
+void RandomForest::load_model(const std::string& filename) {
+    std::ifstream ifs(filename);
+    if (!ifs.is_open()) {
+        throw std::runtime_error("Could not open file to load model");
+    }
+    ifs >> num_trees >> max_depth >> min_samples_split >> min_samples_leaf;
+    trees.resize(num_trees, DecisionTree(max_depth, min_samples_split, min_samples_leaf));
+    for (auto& tree : trees) {
+        tree.load(ifs);
+    }
 }

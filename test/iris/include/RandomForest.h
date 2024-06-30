@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <unordered_map>
+#include <fstream>
 
 struct TreeNode {
     int feature_index;
@@ -20,6 +21,9 @@ public:
     void train(const std::vector<std::vector<double>>& data, const std::vector<int>& labels);
     int predict(const std::vector<double>& sample) const;
 
+    void save(std::ofstream& ofs) const;
+    void load(std::ifstream& ifs);
+
 private:
     TreeNode* root;
     int max_depth;
@@ -36,6 +40,9 @@ private:
     bool is_pure(const std::vector<int>& labels) const;
     int majority_vote(const std::vector<int>& labels) const;
     int predict_sample(TreeNode* node, const std::vector<double>& sample) const;
+
+    void save_node(TreeNode* node, std::ofstream& ofs) const;
+    TreeNode* load_node(std::ifstream& ifs);
 };
 
 class RandomForest {
@@ -48,6 +55,9 @@ public:
     void calculate_metrics(const std::vector<std::vector<double>>& data, const std::vector<int>& labels) const;
     void cross_validate(const std::vector<std::vector<double>>& data, const std::vector<int>& labels, int k = 5);
     static void grid_search(const std::vector<std::vector<double>>& data, const std::vector<int>& labels);
+
+    void save_model(const std::string& filename) const;
+    void load_model(const std::string& filename);
 
 private:
     int num_trees;
