@@ -49,8 +49,21 @@
 
 当然，这并不能完全代表模型的性能，因为我使用的数据集很小，数据特征只有4个。 
 
-**预测结果、混淆矩阵：**
+**训练和预测结果：**
 ```
+Loaded 150 samples with 4 features each.
+Sample 0: 5.1 3.5 1.4 0.2 Label: 0
+Sample 1: 4.9 3 1.4 0.2 Label: 0
+Sample 2: 4.7 3.2 1.3 0.2 Label: 0
+Sample 3: 4.6 3.1 1.5 0.2 Label: 0
+Sample 4: 5 3.6 1.4 0.2 Label: 0
+Best Accuracy: 0.973333 with Trees: 10, Max Depth: 10, Min Samples Split: 10, Min Samples Leaf: 2
+Fold 1 Accuracy: 0.966667
+Fold 2 Accuracy: 0.933333
+Fold 3 Accuracy: 0.966667
+Fold 4 Accuracy: 0.933333
+Fold 5 Accuracy: 0.9
+Average Accuracy: 0.94
 Prediction for sample 6.3, 3.4, 5.6, 2.4: Iris-virginica
 Prediction for sample 6.4, 3.1, 5.5, 1.8: Iris-virginica
 Prediction for sample 6, 3, 4.8, 1.8: Iris-virginica
@@ -71,7 +84,7 @@ Confusion Matrix:
 5 0 0
 0 5 0
 0 0 5
-Label: 2 Precision: 1 Recall: 1 F1-Score: 1  //Iris-virginica
-Label: 1 Precision: 1 Recall: 1 F1-Score: 1  //Iris-versicolor
-Label: 0 Precision: 1 Recall: 1 F1-Score: 1  //Iris-setosa
+Label: 2 Precision: 1 Recall: 1 F1-Score: 1
+Label: 1 Precision: 1 Recall: 1 F1-Score: 1
+Label: 0 Precision: 1 Recall: 1 F1-Score: 1
 ```
